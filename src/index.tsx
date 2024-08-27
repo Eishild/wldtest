@@ -5,12 +5,17 @@ import Job from "./pages/Job"
 import Root from "./pages/Root"
 import { jobLoader } from "./utils/loader/job"
 import { createJobAction } from "./components/Modal"
+import Home from "./pages/Home"
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
     children: [
+      {
+        index: true,
+        element: <Home />,
+      },
       {
         path: "jobs",
         element: <Job />,

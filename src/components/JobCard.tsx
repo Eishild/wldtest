@@ -1,15 +1,12 @@
 import { useSearchParams } from "react-router-dom"
 
-interface skillType {
-  name: string
-  categoryId: string
-}
-
 interface jobProps {
   title: string
   companyImg?: string
   companyName?: string
-  skillsList?: skillType[]
+  skillsList?: {
+    name: string
+  }[]
   description: string
   index: string
 }

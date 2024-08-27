@@ -16,7 +16,9 @@ const Root = () => {
           Offres d'emploi
         </Link>
       </header>
-      <Outlet />
+      <main className="px-8 py-4 w-full">
+        <Outlet />
+      </main>
     </div>
   )
 }

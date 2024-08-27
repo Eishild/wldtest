@@ -31,7 +31,7 @@ const Job = () => {
   const { jobList, jobData } = useLoaderData() as loaderType
 
   return (
-    <div className="px-8 py-4 w-full">
+    <div>
       <div className="flex w-full ">
         <div className="space-y-4 w-2/5 h-[88vh] overflow-auto">
           <Suspense fallback={<p>Loading...</p>}>
