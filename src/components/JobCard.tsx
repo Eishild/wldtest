@@ -8,8 +8,15 @@ interface jobProps {
   companyImg?: string
   companyName?: string
   skillsList?: skillType[]
+  description: string
 }
-const JobCard = ({ title, companyImg, companyName, skillsList }: jobProps) => {
+const JobCard = ({
+  title,
+  companyImg,
+  companyName,
+  skillsList,
+  description,
+}: jobProps) => {
   return (
     <div className="border border-gray-300 rounded-lg p-4 space-y-3">
       <div className="flex items-center gap-2">
@@ -36,6 +43,10 @@ const JobCard = ({ title, companyImg, companyName, skillsList }: jobProps) => {
           ))}
         </div>
       )}
+      <div className="mt-2">
+        <span className="font-medium">Description :</span>
+        <p className="line-clamp-2">{description}</p>
+      </div>
     </div>
   )
 }

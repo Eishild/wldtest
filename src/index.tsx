@@ -3,12 +3,19 @@ import "./index.css"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import Job from "./pages/Job"
 import Root from "./pages/Root"
+import { jobLoader } from "./utils/loader/job"
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
-    children: [{ path: "jobs", element: <Job /> }],
+    children: [
+      {
+        path: "jobs",
+        element: <Job />,
+        loader: jobLoader,
+      },
+    ],
   },
 ])
 
