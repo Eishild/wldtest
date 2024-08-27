@@ -1,3 +1,5 @@
+import { useSearchParams } from "react-router-dom"
+
 interface skillType {
   name: string
   categoryId: string
@@ -9,6 +11,7 @@ interface jobProps {
   companyName?: string
   skillsList?: skillType[]
   description: string
+  index: string
 }
 const JobCard = ({
   title,
@@ -16,9 +19,18 @@ const JobCard = ({
   companyName,
   skillsList,
   description,
+  index,
 }: jobProps) => {
+  let [searchParams, setSearchParams] = useSearchParams()
+
+  const handleSetQuery = (index: string) => {
+    setSearchParams({ jobId: index })
+  }
   return (
-    <div className="border border-gray-300 rounded-lg p-4 space-y-3">
+    <div
+      className="border border-gray-300 rounded-lg p-4 space-y-3 cursor-pointer"
+      onClick={() => handleSetQuery(index)}
+    >
       <div className="flex items-center gap-2">
         {companyImg && companyName && (
           <div className="flex flex-col justify-center">

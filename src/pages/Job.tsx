@@ -1,6 +1,7 @@
 import { Suspense } from "react"
 import JobCard from "../components/JobCard"
 import { Await, useLoaderData } from "react-router-dom"
+import JobDisplayInfo from "../components/JobDisplayInfo"
 
 interface skillType {
   id: string
@@ -17,31 +18,64 @@ interface jobType {
   }
   skillsList?: skillType[]
   descriptionPreview: string
+  description: string
+}
+
+interface loaderType {
+  jobList: jobType[]
+  jobData: jobType
 }
 
 const Job = () => {
-  const jobListData = useLoaderData() as jobType
+  const { jobList, jobData } = useLoaderData() as loaderType
 
   return (
-    <div className="px-8 py-4">
-      <div className="space-y-2 w-2/5">
-        <Suspense fallback={<p>Loading...</p>}>
-          <Await
-            resolve={jobListData}
-            children={(jobList) =>
-              jobList.map((job: jobType) => (
-                <JobCard
-                  key={job.id}
-                  title={job.title}
-                  companyImg={job.smallCompany?.logoImageLink}
-                  companyName={job.smallCompany?.companyName}
-                  skillsList={job.skillsList}
-                  description={job.descriptionPreview}
+    <div className="px-8 py-4 w-full">
+      <div className="flex w-full ">
+        <div className="space-y-4 w-2/5 h-[88vh] overflow-auto">
+          <Suspense fallback={<p>Loading...</p>}>
+            <Await
+              resolve={jobList}
+              children={(jobList) =>
+                jobList.map((job: jobType, index: string) => (
+                  <JobCard
+                    key={job.id}
+                    title={job.title}
+                    companyImg={job.smallCompany?.logoImageLink}
+                    companyName={job.smallCompany?.companyName}
+                    skillsList={job.skillsList}
+                    description={job.descriptionPreview}
+                    index={index}
+                  />
+                ))
+              }
+            />
+          </Suspense>
+        </div>
+        <div className="px-4 relative w-3/5 ">
+          {jobData.id && (
+            <div className="border rounded-lg w-full h-full p-4">
+              <Suspense
+                fallback={<p className="text-red-700 text-3xl ">Loading...</p>}
+              >
+                <Await
+                  resolve={jobData}
+                  errorElement={<div>Job introuvable 😬</div>}
+                  children={(job) =>
+                    job && (
+                      <JobDisplayInfo
+                        title={job.title}
+                        logoImageLink={job.smallCompany?.logoImageLink}
+                        companyName={job.smallCompany?.companyName}
+                        description={job.description}
+                      />
+                    )
+                  }
                 />
-              ))
-            }
-          />
-        </Suspense>
+              </Suspense>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   )
