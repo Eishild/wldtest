@@ -2,6 +2,7 @@ import { Suspense } from "react"
 import JobCard from "../components/JobCard"
 import { Await, useLoaderData } from "react-router-dom"
 import JobDisplayInfo from "../components/JobDisplayInfo"
+import Modal from "../components/Modal"
 
 interface skillType {
   id: string
@@ -53,8 +54,11 @@ const Job = () => {
           </Suspense>
         </div>
         <div className="px-4 relative w-3/5 ">
+          <div className="w-full flex justify-end">
+            <Modal />
+          </div>
           {jobData.id && (
-            <div className="border rounded-lg w-full h-full p-4">
+            <div className="border rounded-lg w-full h-[84vh] p-4">
               <Suspense
                 fallback={<p className="text-red-700 text-3xl ">Loading...</p>}
               >

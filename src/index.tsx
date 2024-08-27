@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import Job from "./pages/Job"
 import Root from "./pages/Root"
 import { jobLoader } from "./utils/loader/job"
+import { createJobAction } from "./components/Modal"
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
         path: "jobs",
         element: <Job />,
         loader: jobLoader,
+        action: createJobAction,
       },
     ],
   },
