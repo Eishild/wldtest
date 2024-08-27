@@ -1,6 +1,6 @@
 const Job = () => {
   return (
-    <main>
+    <main className="px-8 py-4">
       <p>Job</p>
     </main>
   )
